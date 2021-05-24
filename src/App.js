@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import "./App.css";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
   return (
@@ -11,12 +11,13 @@ function App() {
   );
 }
 function Calculator() {
+  console.log("Calculator!!!");
   const [userValues, setUserValues] = useState({
     amount: "",
     years: "",
     interest: "",
   });
-
+  console.log("User VALUES", userValues);
   //state for the results of calculations
   const [results, setResults] = useState({
     monthlyPayments: "",
@@ -25,50 +26,123 @@ function Calculator() {
     isResult: false,
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState({
+    amountError: "",
+    yearsError: "",
+    interestError: "",
+    isEmptyError: "",
+  });
+  // const firstRender = useRef(true);
+  // useEffect(() => {
+  //   if (firstRender.current) {
+  //     firstRender.current = false;
+  //     return;
+  //   }
+  //   isValid();
+  // }, [userValues.amount, userValues.years, userValues.interest]);
 
-  const handleChange = (event) =>
-    setUserValues({ ...userValues, [event.target.name]: event.target.value });
+  const handleChange = (event) => {
+    console.log("Event", event.target.value);
+    const values = {
+      ...userValues,
+      [event.target.name]: event.target.value,
+    };
+    setUserValues(values);
+    console.log("userValues", userValues);
+    isValid(values);
+  };
 
-  const isValid = () => {
-    const { amount, interest, years } = userValues;
-    let actualError = "";
+  const isValid = (values) => {
+    console.log("values in isValid", values);
+    const { amount, interest, years } = values;
+    let actualError = {
+      amountError: "",
+      yearsError: "",
+      interestError: "",
+      isEmptyError: "",
+    };
+    console.log("Actual error", actualError);
     // Validate if there are values
     if (!amount || !interest || !years) {
-      actualError = "All the values are required";
+      actualError.isEmptyError = "All the values are required";
     }
-    // Validade if the values are numbers
-    if (isNaN(amount) || isNaN(interest) || isNaN(years)) {
-      actualError = "All the values must be a valid number";
+    // if "amount" field is being modified
+    if (amount) {
+      // Validade if the values are numbers
+      if (isNaN(amount)) {
+        console.log("in values must be a valid number");
+        actualError.amountError = "All the values must be a valid number";
+      }
+      // Validade if the values are positive numbers
+      if (Number(amount) <= 0) {
+        console.log("Number(amount)", Number(amount));
+        console.log("in values must be apositive numbers");
+        actualError.amountError = "All the values must be a positive number";
+      }
+      // Validate if the values are in the correct range
+      if (Number(amount) < 1000 || Number(amount) > 1000000) {
+        console.log("Number(amount)", Number(amount));
+        console.log("in invalid loan amount ");
+        actualError.amountError = "Minimum loan amount is $1000";
+      }
     }
-    // Validade if the values are positive numbers
-    if (Number(amount) <= 0 || Number(interest) <= 0 || Number(years) <= 0) {
-      actualError = "All the values must be a positive number";
+
+    if (years) {
+      // Validade if the values are numbers
+      if (isNaN(years)) {
+        actualError.yearsError = "All the values must be a valid number";
+      }
+      // Validade if the values are positive numbers
+      if (Number(years) <= 0) {
+        actualError.yearsError = "All the values must be a positive number";
+      }
+      // Validate if the values are in the correct range
+      if (Number(years) < 0 || Number(years) > 40) {
+        actualError.yearsError = "The number must be between 1 and 40";
+      }
     }
-    if (
-      Number(amount) < 1000 ||
-      Number(interest) <= 0 ||
-      Number(interest) >= 100 ||
-      Number(years) <= 0
-    ) {
-      actualError = "Invalid amount";
+
+    if (interest) {
+      // Validade if the values are numbers
+      if (isNaN(interest)) {
+        console.log("in values must be a valid number");
+        actualError.interestError = "All the values must be a valid number";
+      }
+      // Validade if the values are positive numbers
+      if (Number(interest) <= 0) {
+        console.log("Number(interest)", Number(interest));
+        console.log("in values must be apositive numbers");
+        actualError.interestError = "All the values must be a positive number";
+      }
+      // Validate if the values are in the correct range
+      if (Number(interest) < 0 || Number(interest) > 99) {
+        actualError.interestError = "Invalid interest rate";
+      }
     }
     if (actualError) {
+      console.log("actualError, end", actualError);
       setError(actualError);
       return false;
     }
+    setError("");
     return true;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValid()) {
-      setError("");
+    let count = 0;
+    Object.values(error).forEach((err) => {
+      if (err.length !== 0) {
+        count++;
+      }
+    });
+    if (count === 0) {
       calculateResults(userValues);
     }
   };
 
   const calculateResults = ({ amount, interest, years }) => {
+    console.log("IN calculate results");
     const userAmount = Number(amount);
     const calculatedInterest = Number(interest) / 100 / 12;
     const calculatedPayments = Number(years) * 12;
@@ -112,7 +186,6 @@ function Calculator() {
 
   return (
     <ContentBox>
-      <Error>{error}</Error>
       <Form onSubmit={handleSubmit}>
         <FormContainer>
           <Label htmlFor="amount">Loan amount</Label>
@@ -123,8 +196,8 @@ function Calculator() {
             value={userValues.amount}
             // required={true}
           />
-
-          <Label htmlFor="years">Loan term in years</Label>
+          <Error>{error.amountError}</Error>
+          <Label htmlFor="years">Years to repay</Label>
           <Input
             type="text"
             name="years"
@@ -132,7 +205,7 @@ function Calculator() {
             value={userValues.years}
             // required={true}
           />
-
+          <Error>{error.yearsError}</Error>
           <Label htmlFor="interest">Interest rate per year</Label>
           <Input
             type="text"
@@ -141,6 +214,7 @@ function Calculator() {
             value={userValues.interest}
             // required={true}
           />
+          <Error>{error.interestError}</Error>
           <Button type="submit">Calculate!</Button>
         </FormContainer>
         <FormContainer>
@@ -158,6 +232,7 @@ function Calculator() {
           <ResultField>Total Interest: ${results.totalInterest} </ResultField>
         </FormContainer>
       </Form>
+      <Error>{error.isEmptyError}</Error>
     </ContentBox>
   );
 }
