@@ -1,7 +1,8 @@
 // import logo from './logo.svg';
 import "./App.css";
 import styled from "styled-components";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import calculatorLogo from "./Logo/mortgage-calculator.svg";
 
 function App() {
   return (
@@ -192,6 +193,10 @@ function Calculator() {
 
   return (
     <ContentBox>
+      <TitleBox>
+        <Logo src={calculatorLogo} />
+        <Title>Loan Calculator</Title>
+      </TitleBox>
       <Form onSubmit={handleSubmit}>
         {!isResultOpen && (
           <FormContainer>
@@ -361,4 +366,29 @@ const ResultField = styled.h4`
 
 const Error = styled.h3`
   color: red;
+`;
+const TitleBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+`;
+const Title = styled.h1`
+  color: black;
+`;
+export const Logo = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  margin: 10px;
+  // border: 1px solid black;
+
+  @media (max-width: 900px) {
+    width: 30px;
+    height: 30px;
+  }
+
+  @media (min-width: 1800px) {
+    width: 200px;
+    height: 200px;
+  }
 `;

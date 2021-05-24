@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:ns1="http://sozi.baierouge.fr"
+    id="svg3751"
+    sodipodi:docname="mortgage calculator.svg"
+    viewBox="0 0 64 64"
+    version="1.1"
+    inkscape:version="0.47 r22583"
+  >
+  <defs
+      id="defs3753"
+    >
+    <linearGradient
+        id="linearGradient4419"
+        y2="35.313"
+        gradientUnits="userSpaceOnUse"
+        x2="18.311"
+        gradientTransform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+        y1="23.344"
+        x1="37.046"
+        inkscape:collect="always"
+      >
+      <stop
+          id="stop4415"
+          style="stop-color:#ffffff"
+          offset="0"
+      />
+      <stop
+          id="stop4417"
+          style="stop-color:#ffffff;stop-opacity:0"
+          offset="1"
+      />
+    </linearGradient
+    >
+    <linearGradient
+        id="linearGradient6164"
+        y2="28.266"
+        gradientUnits="userSpaceOnUse"
+        x2="41.913"
+        gradientTransform="matrix(1.2353 0 0 1.0097 -5.0799 .17116)"
+        y1="27.998"
+        x1="17.598"
+        inkscape:collect="always"
+      >
+      <stop
+          id="stop6160"
+          style="stop-color:#aade87"
+          offset="0"
+      />
+      <stop
+          id="stop6162"
+          style="stop-color:#8a916f"
+          offset="1"
+      />
+    </linearGradient
+    >
+  </defs
+  >
+  <sodipodi:namedview
+      id="base"
+      bordercolor="#666666"
+      inkscape:pageshadow="2"
+      inkscape:window-y="-4"
+      pagecolor="#ffffff"
+      inkscape:window-height="712"
+      inkscape:grid-bbox="true"
+      inkscape:window-maximized="1"
+      inkscape:zoom="1"
+      inkscape:window-x="-4"
+      showgrid="true"
+      borderopacity="1.0"
+      inkscape:current-layer="layer1"
+      inkscape:cx="34.793327"
+      inkscape:cy="28.748154"
+      inkscape:window-width="1280"
+      inkscape:pageopacity="0.0"
+      inkscape:document-units="px"
+  />
+  <g
+      id="layer1"
+      inkscape:label="Layer 1"
+      inkscape:groupmode="layer"
+    >
+    <path
+        id="path2852"
+        sodipodi:nodetypes="ccccccccc"
+        style="stroke-linejoin:round;stroke:#322f2f;stroke-linecap:round;stroke-width:.74486;fill:#241c1c"
+        d="m9.2872 63.636 0.0529-36.29-8.278-0.131 30.866-25.924 31.191 26.843l-8.7088 0.05433-0.23355 35.678 0.02974 0.13525-44.919-0.365z"
+    />
+    <path
+        id="path4333"
+        sodipodi:nodetypes="cccccc"
+        style="opacity:.46842;stroke-width:0;fill:url(#linearGradient4419)"
+        d="m53.834 49.885 0.634-22.59 7.318 0.331-29.929-25.302-13.35 10.158c-7.382 20.868 30.352 6.975 35.327 37.403z"
+    />
+    <path
+        id="rect4431"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#f9f9f9"
+        d="m17.917 38.522h7.9522c0.17161 0 0.30976 0.13815 0.30976 0.30976v7.4821c0 0.17161-0.13815 0.30977-0.30976 0.30977h-7.9522c-0.17161 0-0.30977-0.13816-0.30977-0.30977v-7.4821c0-0.17161 0.13816-0.30976 0.30977-0.30976z"
+    />
+    <path
+        id="rect4433"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#ececec"
+        d="m28.316 38.522h7.9522c0.17161 0 0.30976 0.13815 0.30976 0.30976v7.4821c0 0.17161-0.13815 0.30977-0.30976 0.30977h-7.9522c-0.1716 0-0.30976-0.13816-0.30976-0.30977v-7.4821c0-0.17161 0.13816-0.30976 0.30976-0.30976z"
+    />
+    <path
+        id="rect4435"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#f9f9f9"
+        d="m17.917 48.134h7.9522c0.17161 0 0.30976 0.13816 0.30976 0.30976v7.4821c0 0.17161-0.13815 0.30976-0.30976 0.30976h-7.9522c-0.17161 0-0.30977-0.13815-0.30977-0.30976v-7.4821c0-0.17161 0.13816-0.30976 0.30977-0.30976z"
+    />
+    <path
+        id="rect4437"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#e6e6e6"
+        d="m28.316 48.134h7.9522c0.17161 0 0.30976 0.13816 0.30976 0.30976v7.4821c0 0.17161-0.13815 0.30976-0.30976 0.30976h-7.9522c-0.1716 0-0.30976-0.13815-0.30976-0.30976v-7.4821c0-0.17161 0.13816-0.30976 0.30976-0.30976z"
+    />
+    <path
+        id="rect4443"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#ff0000"
+        d="m38.182 38.522h7.9522c0.1716 0 0.30976 0.13815 0.30976 0.30976v7.4821c0 0.17161-0.13816 0.30977-0.30976 0.30977h-7.9522c-0.17161 0-0.30976-0.13816-0.30976-0.30977v-7.4821c0-0.17161 0.13815-0.30976 0.30976-0.30976z"
+    />
+    <path
+        id="rect4445"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#1e1515;stroke-linecap:round;stroke-width:.38970;fill:#f2f2f2"
+        d="m38.182 48.134h7.9522c0.1716 0 0.30976 0.13816 0.30976 0.30976v7.4821c0 0.17161-0.13816 0.30976-0.30976 0.30976h-7.9522c-0.17161 0-0.30976-0.13815-0.30976-0.30976v-7.4821c0-0.17161 0.13815-0.30976 0.30976-0.30976z"
+    />
+    <g
+        id="text4447"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#666666"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6113"
+          d="m20.133 38.162h1.1887v-1.1949h1.0024v1.1949h1.1949v1.0056h-1.1949v1.1887h-1.0024v-1.1887h-1.1887z"
+      />
+    </g
+    >
+    <g
+        id="text4451"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#666666"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6116"
+          d="m29.427 38.38h2.3428v1.2466h-2.3428z"
+      />
+    </g
+    >
+    <g
+        id="text4455"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#333333"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6119"
+          d="m39.055 38.834 1.0418 0.11844c-0.05743 0.21715-0.15165 0.40513-0.28265 0.56396-0.13101 0.15882-0.29836 0.2822-0.50204 0.37014-0.20369 0.08794-0.46256 0.1319-0.77662 0.1319-0.30329 0-0.55588-0.02827-0.75777-0.08479-0.2019-0.05653-0.37552-0.14806-0.52089-0.27458-0.14536-0.12652-0.25932-0.27502-0.34187-0.44551s-0.12383-0.39661-0.12383-0.67836c0-0.29431 0.05025-0.53928 0.15075-0.73489 0.07358-0.14357 0.17408-0.27233 0.3015-0.38629s0.25842-0.19875 0.39302-0.25439c0.21356-0.08793 0.48724-0.1319 0.82103-0.1319 0.4666 0.000003 0.82238 0.08345 1.0673 0.25035 0.24496 0.1669 0.4168 0.41097 0.5155 0.7322l-1.031 0.13729c-0.03231-0.12203-0.09108-0.214-0.17632-0.27592-0.08525-0.06191-0.19965-0.09287-0.34322-0.09287-0.18126 0.000003-0.32797 0.06506-0.44013 0.19516-0.11216 0.13011-0.16825 0.32707-0.16824 0.59088-0.000001 0.2351 0.05563 0.41366 0.1669 0.53569 0.11126 0.12203 0.25304 0.18305 0.42532 0.18305 0.14357 0.000001 0.26426-0.03679 0.36206-0.11037s0.17093-0.18664 0.21939-0.33918z"
+      />
+    </g
+    >
+    <g
+        id="text4459"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#666666"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6122"
+          d="m36.88 45.42h3.3891v1.0087h-3.3891zm0 1.5269h3.3891v1.0056h-3.3891z"
+      />
+    </g
+    >
+    <g
+        id="text4463"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#666666"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6125"
+          d="m30.563 44.883h0.45997l-0.81379 3.3502h-0.45554z"
+      />
+    </g
+    >
+    <g
+        id="text4467"
+        style="stroke:#1e1515;stroke-width:0.316;fill:#666666"
+        transform="matrix(1.2332 0 0 1.2332 -5.0175 -5.1471)"
+      >
+      <path
+          id="path6128"
+          d="m20.314 45.032h1.0524l0.36824 0.64496 0.42707-0.64496h0.97834l-0.78878 1.1025 0.84543 1.2115h-1.035l-0.42707-0.7452-0.50334 0.7452h-0.96091l0.84107-1.2115z"
+      />
+    </g
+    >
+    <rect
+        id="rect6134"
+        style="stroke-linejoin:round;fill-rule:evenodd;stroke:#322f2f;stroke-linecap:round;stroke-width:.59207;fill:url(#linearGradient6164)"
+        ry="1.7094"
+        height="8.7554"
+        width="36.268"
+        y="24.334"
+        x="13.461"
+    />
+  </g
+  >
+  <metadata
+    >
+    <rdf:RDF
+      >
+      <cc:Work
+        >
+        <dc:format
+          >image/svg+xml</dc:format
+        >
+        <dc:type
+            rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+        />
+        <cc:license
+            rdf:resource="http://creativecommons.org/licenses/publicdomain/"
+        />
+        <dc:publisher
+          >
+          <cc:Agent
+              rdf:about="http://openclipart.org/"
+            >
+            <dc:title
+              >Openclipart</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:publisher
+        >
+        <dc:title
+          >mortgage calculator</dc:title
+        >
+        <dc:date
+          >2010-07-04T23:33:21</dc:date
+        >
+        <dc:description
+          >real estate clip art</dc:description
+        >
+        <dc:source
+          >https://openclipart.org/detail/70237/mortgage-calculator-by-netalloy</dc:source
+        >
+        <dc:creator
+          >
+          <cc:Agent
+            >
+            <dc:title
+              >netalloy</dc:title
+            >
+          </cc:Agent
+          >
+        </dc:creator
+        >
+        <dc:subject
+          >
+          <rdf:Bag
+            >
+            <rdf:li
+              >calculate</rdf:li
+            >
+            <rdf:li
+              >home icon</rdf:li
+            >
+            <rdf:li
+              >mortgage</rdf:li
+            >
+            <rdf:li
+              >real estate</rdf:li
+            >
+            <rdf:li
+              >valuation</rdf:li
+            >
+          </rdf:Bag
+          >
+        </dc:subject
+        >
+      </cc:Work
+      >
+      <cc:License
+          rdf:about="http://creativecommons.org/licenses/publicdomain/"
+        >
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Reproduction"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#Distribution"
+        />
+        <cc:permits
+            rdf:resource="http://creativecommons.org/ns#DerivativeWorks"
+        />
+      </cc:License
+      >
+    </rdf:RDF
+    >
+  </metadata
+  >
+</svg
+>
