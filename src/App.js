@@ -32,14 +32,8 @@ function Calculator() {
     interestError: "",
     isEmptyError: "",
   });
-  // const firstRender = useRef(true);
-  // useEffect(() => {
-  //   if (firstRender.current) {
-  //     firstRender.current = false;
-  //     return;
-  //   }
-  //   isValid();
-  // }, [userValues.amount, userValues.years, userValues.interest]);
+
+  const [isResultOpen, setIsResultOpen] = useState(false);
 
   const handleChange = (event) => {
     console.log("Event", event.target.value);
@@ -49,10 +43,11 @@ function Calculator() {
     };
     setUserValues(values);
     console.log("userValues", userValues);
-    isValid(values);
+    const actualError = returnError(values);
+    setError(actualError);
   };
 
-  const isValid = (values) => {
+  const returnError = (values) => {
     console.log("values in isValid", values);
     const { amount, interest, years } = values;
     let actualError = {
@@ -63,9 +58,9 @@ function Calculator() {
     };
     console.log("Actual error", actualError);
     // Validate if there are values
-    if (!amount || !interest || !years) {
-      actualError.isEmptyError = "All the values are required";
-    }
+    // if (!amount || !interest || !years) {
+    //   actualError.isEmptyError = "All the values are required";
+    // }
     // if "amount" field is being modified
     if (amount) {
       // Validade if the values are numbers
@@ -119,13 +114,14 @@ function Calculator() {
         actualError.interestError = "Invalid interest rate";
       }
     }
-    if (actualError) {
-      console.log("actualError, end", actualError);
-      setError(actualError);
-      return false;
-    }
-    setError("");
-    return true;
+    // if (actualError) {
+    //   console.log("actualError, end", actualError);
+    //   setError(actualError);
+    //   return false;
+    // }
+    // setError("");
+    // return true;
+    return actualError;
   };
 
   const handleSubmit = (e) => {
@@ -138,6 +134,16 @@ function Calculator() {
     });
     if (count === 0) {
       calculateResults(userValues);
+      toggle();
+    }
+  };
+
+  const toggle = () => {
+    if (isResultOpen) {
+      setIsResultOpen(false);
+      clearFields();
+    } else {
+      setIsResultOpen(true);
     }
   };
 
@@ -187,50 +193,55 @@ function Calculator() {
   return (
     <ContentBox>
       <Form onSubmit={handleSubmit}>
-        <FormContainer>
-          <Label htmlFor="amount">Loan amount</Label>
-          <Input
-            type="text"
-            name="amount"
-            onChange={handleChange}
-            value={userValues.amount}
-            // required={true}
-          />
-          <Error>{error.amountError}</Error>
-          <Label htmlFor="years">Years to repay</Label>
-          <Input
-            type="text"
-            name="years"
-            onChange={handleChange}
-            value={userValues.years}
-            // required={true}
-          />
-          <Error>{error.yearsError}</Error>
-          <Label htmlFor="interest">Interest rate per year</Label>
-          <Input
-            type="text"
-            name="interest"
-            onChange={handleChange}
-            value={userValues.interest}
-            // required={true}
-          />
-          <Error>{error.interestError}</Error>
-          <Button type="submit">Calculate!</Button>
-        </FormContainer>
-        <FormContainer>
-          <ResultField>
-            Loan amount: ${userValues.amount} <br /> Interest:{" "}
-            {userValues.interest}% <br /> Years to repay: {userValues.years}
-          </ResultField>
-          <ResultField>
-            {" "}
-            Monthly Payment: ${results.monthlyPayment}{" "}
-          </ResultField>
+        {!isResultOpen && (
+          <FormContainer>
+            <Label htmlFor="amount">Loan amount</Label>
+            <Input
+              type="text"
+              name="amount"
+              onChange={handleChange}
+              value={userValues.amount}
+              required={true}
+            />
+            <Error>{error.amountError}</Error>
+            <Label htmlFor="years">Loan term in years</Label>
+            <Input
+              type="text"
+              name="years"
+              onChange={handleChange}
+              value={userValues.years}
+              required={true}
+            />
+            <Error>{error.yearsError}</Error>
+            <Label htmlFor="interest">Interest rate per year</Label>
+            <Input
+              type="text"
+              name="interest"
+              onChange={handleChange}
+              value={userValues.interest}
+              required={true}
+            />
+            <Error>{error.interestError}</Error>
+            <Button type="submit">Calculate!</Button>
+          </FormContainer>
+        )}
+        {isResultOpen && (
+          <FormContainer>
+            <ResultField>
+              Loan amount: ${userValues.amount} <br /> Interest:{" "}
+              {userValues.interest}% <br /> Years to repay: {userValues.years}
+            </ResultField>
+            <ResultField>
+              {" "}
+              Monthly Payment: ${results.monthlyPayment}{" "}
+            </ResultField>
 
-          <ResultField>Total Payment: ${results.totalPayment}</ResultField>
+            <ResultField>Total Payment: ${results.totalPayment}</ResultField>
 
-          <ResultField>Total Interest: ${results.totalInterest} </ResultField>
-        </FormContainer>
+            <ResultField>Total Interest: ${results.totalInterest} </ResultField>
+            <Button onClick={toggle}>Calculate again!</Button>
+          </FormContainer>
+        )}
       </Form>
       <Error>{error.isEmptyError}</Error>
     </ContentBox>
