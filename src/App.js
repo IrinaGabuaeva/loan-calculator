@@ -13,13 +13,12 @@ function App() {
 }
 
 function Calculator() {
-  console.log("Calculator!!!");
   const [userValues, setUserValues] = useState({
     amount: "",
     months: "",
     interest: "",
   });
-  console.log("User VALUES", userValues);
+
   //state for the results of calculations
   const [results, setResults] = useState({
     monthlyPayments: "",
@@ -28,6 +27,7 @@ function Calculator() {
     isResult: false,
   });
 
+  //state for errors
   const [error, setError] = useState({
     amountError: "",
     monthsError: "",
@@ -37,54 +37,52 @@ function Calculator() {
   const [isResultOpen, setIsResultOpen] = useState(false);
 
   const handleChange = (event) => {
-    console.log("Event", event.target.value);
-    // if (event.target.name === "years") convert();
+    //if input name is 'year' change it to 'month'
     const inputName =
       event.target.name === "years" ? "months" : event.target.name;
+    //if input name is 'years', convert its value into months
     let inputValue =
       event.target.name === "years"
         ? event.target.value * 12
         : event.target.value;
+
     if (inputValue === 0) inputValue = "";
+
     const values = {
       ...userValues,
       [inputName]: inputValue,
     };
 
-    console.log("values in handleChange", values);
+    // set received values on state
     setUserValues(values);
-    console.log("userValues", userValues);
+    // check for errors
     const actualError = returnError(values);
     setError(actualError);
   };
 
+  // convert months to years
   const convert = () => {
-    console.log("userValues.months / 12;", userValues.months / 12);
     if (userValues.months) {
       return userValues.months / 12;
     } else return "";
   };
 
+  //check if inputs are valid
   const returnError = (values) => {
-    console.log("values in isValid", values);
     const { amount, interest, months } = values;
     let actualError = {
       amountError: "",
       monthsError: "",
       interestError: "",
     };
-    console.log("Actual error", actualError);
 
     if (amount) {
       // Validade if the values are numbers
       if (isNaN(amount)) {
-        console.log("in values must be a valid number");
         actualError.amountError = "All the values must be a valid number";
       }
       // Validade if the values are positive numbers
       if (Number(amount) <= 0) {
-        console.log("Number(amount)", Number(amount));
-        console.log("in values must be apositive numbers");
         actualError.amountError = "All the values must be a positive number";
       }
       // Validate if the values are in the correct range
@@ -114,13 +112,10 @@ function Calculator() {
     if (interest) {
       // Validade if the values are numbers
       if (isNaN(interest)) {
-        console.log("in values must be a valid number");
         actualError.interestError = "All the values must be a valid number";
       }
       // Validade if the values are positive numbers
       if (Number(interest) <= 0) {
-        console.log("Number(interest)", Number(interest));
-        console.log("in values must be apositive numbers");
         actualError.interestError = "All the values must be a positive number";
       }
       // Validate if the values are in the correct range
@@ -128,30 +123,26 @@ function Calculator() {
         actualError.interestError = "Invalid interest rate";
       }
     }
-    // if (actualError) {
-    //   console.log("actualError, end", actualError);
-    //   setError(actualError);
-    //   return false;
-    // }
-    // setError("");
-    // return true;
     return actualError;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //check for errors before being able to submit
     let count = 0;
     Object.values(error).forEach((err) => {
       if (err.length !== 0) {
         count++;
       }
     });
+    // if no errors calculate results and display it instead of original form
     if (count === 0) {
       calculateResults(userValues);
       toggle();
     }
   };
 
+  // toggle view between form and results
   const toggle = () => {
     if (isResultOpen) {
       setIsResultOpen(false);
@@ -162,7 +153,6 @@ function Calculator() {
   };
 
   const calculateResults = ({ amount, interest, months }) => {
-    console.log("IN calculate results");
     const userAmount = Number(amount);
     const calculatedInterest = Number(interest) / 100 / 12;
     const calculatedPayments = Number(months) * 12;
