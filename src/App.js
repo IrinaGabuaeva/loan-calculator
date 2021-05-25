@@ -31,7 +31,6 @@ function Calculator() {
     amountError: "",
     monthsError: "",
     interestError: "",
-    isEmptyError: "",
   });
 
   const [isResultOpen, setIsResultOpen] = useState(false);
@@ -56,17 +55,8 @@ function Calculator() {
     console.log("userValues", userValues);
     const actualError = returnError(values);
     setError(actualError);
-    // let count = 0;
-    // Object.values(error).forEach((err) => {
-    //   if (err.length !== 0) {
-    //     count++;
-    //   }
-    // });
-    // if (count === 0) {
-    //   calculateResults(userValues);
-    // toggle();
-    // }
   };
+
   const convert = () => {
     console.log("userValues.months / 12;", userValues.months / 12);
     if (userValues.months) {
@@ -81,7 +71,6 @@ function Calculator() {
       amountError: "",
       monthsError: "",
       interestError: "",
-      isEmptyError: "",
     };
     console.log("Actual error", actualError);
 
@@ -98,10 +87,11 @@ function Calculator() {
         actualError.amountError = "All the values must be a positive number";
       }
       // Validate if the values are in the correct range
-      if (Number(amount) < 1000 || Number(amount) > 1000000) {
-        console.log("Number(amount)", Number(amount));
-        console.log("in invalid loan amount ");
+      if (Number(amount) < 1000) {
         actualError.amountError = "Minimum loan amount is $1000";
+      }
+      if (Number(amount) > 1000000) {
+        actualError.amountError = "Maximum loan amount is $1'000 000";
       }
     }
 
@@ -115,8 +105,8 @@ function Calculator() {
         actualError.monthsError = "All the values must be a positive number";
       }
       // Validate if the values are in the correct range
-      if (Number(months) < 0 || Number(months) > 40) {
-        actualError.monthsError = "Enter a number between 1 and 40";
+      if (Number(months) < 12 || Number(months) > 480) {
+        actualError.monthsError = "Invalid loan term";
       }
     }
 
@@ -220,65 +210,69 @@ function Calculator() {
         <Title>Loan Calculator</Title>
       </TitleBox>
       <Form onSubmit={handleSubmit}>
-        {/* {!isResultOpen && ( */}
-        <FormContainer>
-          <Label htmlFor="amount">Loan amount</Label>
-          <Input
-            type="text"
-            name="amount"
-            onChange={handleChange}
-            value={userValues.amount}
-            required={true}
-          />
-          <Error>{error.amountError}</Error>
-          <Label htmlFor="months">Loan term in years</Label>
-          <Input
-            type="text"
-            name="years"
-            onChange={handleChange}
-            value={convert()}
-            required={true}
-          />
-          <Text>Or</Text>
-          <Label htmlFor="months">Loan term in months</Label>
-          <Input
-            type="text"
-            name="months"
-            onChange={handleChange}
-            value={userValues.months}
-          />
-          <Error>{error.monthsError}</Error>
-          <Label htmlFor="interest">Interest rate per year</Label>
-          <Input
-            type="text"
-            name="interest"
-            onChange={handleChange}
-            value={userValues.interest}
-            required={true}
-          />
-          <Error>{error.interestError}</Error>
-          <Button type="submit">Calculate!</Button>
-        </FormContainer>
-        {/* )} */}
-        {/* {isResultOpen && ( */}
-        <FormContainer>
-          <ResultField>
-            Loan amount: ${userValues.amount} <br /> Interest:{" "}
-            {userValues.interest}% <br /> months to repay: {userValues.months}
-          </ResultField>
-          <ResultField>
-            {" "}
-            Monthly Payment: ${results.monthlyPayment}{" "}
-          </ResultField>
+        {!isResultOpen && (
+          <FormContainer>
+            <Label>Loan amount</Label>
+            <Input
+              type="text"
+              name="amount"
+              autocomplete="off"
+              onChange={handleChange}
+              value={userValues.amount}
+              required={true}
+            />
+            <Error>{error.amountError}</Error>
+            <Label htmlFor="months">Loan term in years</Label>
+            <Input
+              type="text"
+              name="years"
+              onChange={handleChange}
+              value={convert()}
+              required={true}
+            />
+            <Error>{error.monthsError}</Error>
+            <Text>Or</Text>
+            <Label htmlFor="months">Loan term in months</Label>
+            <Input
+              type="text"
+              name="months"
+              onChange={handleChange}
+              value={userValues.months}
+            />
+            <Error>{error.monthsError}</Error>
+            <Label htmlFor="interest">Interest rate per year</Label>
+            <Input
+              type="text"
+              name="interest"
+              onChange={handleChange}
+              value={userValues.interest}
+              required={true}
+            />
+            <Error>{error.interestError}</Error>
+            <Button type="submit">Calculate!</Button>
+          </FormContainer>
+        )}
+        {isResultOpen && (
+          <FormContainer>
+            <ResultField>Loan amount: ${userValues.amount}</ResultField>
+            <ResultField>Interest: {userValues.interest}%</ResultField>
+            <ResultField>Months to repay: {userValues.months}</ResultField>
+            <MonthlyPayment>
+              {" "}
+              Monthly Payment: ${results.monthlyPayment}{" "}
+            </MonthlyPayment>
 
-          <ResultField>Total Payment: ${results.totalPayment}</ResultField>
+            <ResultField_2>
+              Total Payment: ${results.totalPayment}
+            </ResultField_2>
 
-          <ResultField>Total Interest: ${results.totalInterest} </ResultField>
-          <Button onClick={toggle}>Calculate again!</Button>
-        </FormContainer>
-        {/* )} */}
+            <ResultField_2>
+              Total Interest: ${results.totalInterest}{" "}
+            </ResultField_2>
+            <Button onClick={toggle}>Calculate again!</Button>
+          </FormContainer>
+        )}
       </Form>
-      <Error>{error.isEmptyError}</Error>
     </ContentBox>
   );
 }
@@ -289,11 +283,14 @@ export default App;
 //#007f85
 //#79ad9f
 const colorPrimary = "#007f85";
-const colorMaybePrimary = "#6DB471";
+const colorSecondary = "#eadd46";
 const colorWhite = "#fdfffc";
-const colorError = "e86741";
-const colorTitle = "#193439";
-const colorErrorMaybe = "#740c59";
+const colorDark = "#1c2725";
+// const colorDark = "#193439";
+
+const textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
+const boxShadow =
+  "rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px";
 
 const ContentBox = styled.div`
   display: flex;
@@ -318,15 +315,16 @@ const ContentBox = styled.div`
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 450px;
+  width: 450px;
+  height: 500px;
 
   // border: 2px solid #2c3531;
 
-  padding: 35px;
+  padding: 40px;
   margin: 30px;
   background-color: ${colorPrimary};
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: ${boxShadow};
+  // rgba(0, 0, 0, 0.15) 0px 2px 8px;
   // box-shadow: 5px 10px #888888;
 
   // background-color: #116466;
@@ -383,16 +381,17 @@ const Input = styled.input`
   }
 `;
 const Button = styled.button`
-  width: 150px;
+  // width: 80px;
+
   outline: none;
-  font-weight: 700;
-  background-color: #d9b08c;
-  color: #2c3531;
+  // font-weight: 700;
+  background-color: ${colorSecondary};
+  color: ${colorDark};
 
-  letter-spacing: 0.1rem;
-  font-size: 1.2rem;
-
-  margin: 10px;
+  // letter-spacing: 0.1rem;
+  font-size: 0.9rem;
+  padding: 10px;
+  margin: 15px 0 15px 0;
   &:active {
     border: 1px solid black;
   }
@@ -422,11 +421,22 @@ const Button = styled.button`
 `;
 
 const ResultField = styled.h4`
-  margin: 10px;
+  margin: 8px;
+  color: ${colorWhite};
+`;
+const ResultField_2 = styled(ResultField)`
+  text-shadow: ${textShadow};
+  margin-bottom: 15px;
+`;
+const MonthlyPayment = styled(Label)`
+  font-size: 35px;
+  margin: 60px;
+  text-align: center;
+  color: ${colorSecondary};
 `;
 
 const Error = styled.h3`
-  color: ${colorError};
+  color: ${colorDark};
   font-size: 0.8rem;
 `;
 const TitleBox = styled.div`
@@ -435,10 +445,10 @@ const TitleBox = styled.div`
   align-items: baseline;
 `;
 const Title = styled.h1`
-  color: ${colorTitle};
+  color: ${colorDark};
 `;
 const Text = styled.div`
-  padding: 10px 0 10px 0;
+  padding: 5px 0 20px 0;
   color: ${colorWhite};
 
   text-transform: uppercase;
