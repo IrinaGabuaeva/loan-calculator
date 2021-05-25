@@ -293,7 +293,7 @@ const TitleBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
 `;
 
 const Logo = styled.img`
@@ -338,7 +338,6 @@ const FormContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 450px;
-  height: 500px;
   padding: 40px;
   background-color: ${colorPrimary};
   box-shadow: ${boxShadow};
@@ -368,7 +367,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  height: 350px;
+  height: 45px;
   margin-top: 5px;
   padding: 0 0 0 10px;
   background-color: ${colorWhite};
