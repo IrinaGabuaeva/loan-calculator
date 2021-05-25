@@ -15,7 +15,6 @@ function Calculator() {
   console.log("Calculator!!!");
   const [userValues, setUserValues] = useState({
     amount: "",
-    years: "",
     months: "",
     interest: "",
   });
@@ -30,7 +29,7 @@ function Calculator() {
 
   const [error, setError] = useState({
     amountError: "",
-    yearsError: "",
+    monthsError: "",
     interestError: "",
     isEmptyError: "",
   });
@@ -39,9 +38,17 @@ function Calculator() {
 
   const handleChange = (event) => {
     console.log("Event", event.target.value);
+    // if (event.target.name === "years") convert();
+    const inputName =
+      event.target.name === "years" ? "months" : event.target.name;
+    let inputValue =
+      event.target.name === "years"
+        ? event.target.value * 12
+        : event.target.value;
+    if (inputValue === 0) inputValue = "";
     const values = {
       ...userValues,
-      [event.target.name]: event.target.value,
+      [inputName]: inputValue,
     };
 
     console.log("values in handleChange", values);
@@ -49,14 +56,30 @@ function Calculator() {
     console.log("userValues", userValues);
     const actualError = returnError(values);
     setError(actualError);
+    // let count = 0;
+    // Object.values(error).forEach((err) => {
+    //   if (err.length !== 0) {
+    //     count++;
+    //   }
+    // });
+    // if (count === 0) {
+    //   calculateResults(userValues);
+    // toggle();
+    // }
+  };
+  const convert = () => {
+    console.log("userValues.months / 12;", userValues.months / 12);
+    if (userValues.months) {
+      return userValues.months / 12;
+    } else return "";
   };
 
   const returnError = (values) => {
     console.log("values in isValid", values);
-    const { amount, interest, years } = values;
+    const { amount, interest, months } = values;
     let actualError = {
       amountError: "",
-      yearsError: "",
+      monthsError: "",
       interestError: "",
       isEmptyError: "",
     };
@@ -82,18 +105,18 @@ function Calculator() {
       }
     }
 
-    if (years) {
+    if (months) {
       // Validade if the values are numbers
-      if (isNaN(years)) {
-        actualError.yearsError = "All the values must be a valid number";
+      if (isNaN(months)) {
+        actualError.monthsError = "All the values must be a valid number";
       }
       // Validade if the values are positive numbers
-      if (Number(years) <= 0) {
-        actualError.yearsError = "All the values must be a positive number";
+      if (Number(months) <= 0) {
+        actualError.monthsError = "All the values must be a positive number";
       }
       // Validate if the values are in the correct range
-      if (Number(years) < 0 || Number(years) > 40) {
-        actualError.yearsError = "Enter a number between 1 and 40";
+      if (Number(months) < 0 || Number(months) > 40) {
+        actualError.monthsError = "Enter a number between 1 and 40";
       }
     }
 
@@ -147,11 +170,11 @@ function Calculator() {
     }
   };
 
-  const calculateResults = ({ amount, interest, years }) => {
+  const calculateResults = ({ amount, interest, months }) => {
     console.log("IN calculate results");
     const userAmount = Number(amount);
     const calculatedInterest = Number(interest) / 100 / 12;
-    const calculatedPayments = Number(years) * 12;
+    const calculatedPayments = Number(months) * 12;
     const x = Math.pow(1 + calculatedInterest, calculatedPayments);
     const monthly = (userAmount * x * calculatedInterest) / (x - 1);
 
@@ -179,7 +202,7 @@ function Calculator() {
     setUserValues({
       amount: "",
       interest: "",
-      years: "",
+      months: "",
     });
 
     setResults({
@@ -197,63 +220,63 @@ function Calculator() {
         <Title>Loan Calculator</Title>
       </TitleBox>
       <Form onSubmit={handleSubmit}>
-        {!isResultOpen && (
-          <FormContainer>
-            <Label htmlFor="amount">Loan amount</Label>
-            <Input
-              type="text"
-              name="amount"
-              onChange={handleChange}
-              value={userValues.amount}
-              required={true}
-            />
-            <Error>{error.amountError}</Error>
-            <Label htmlFor="years">Loan term in years</Label>
-            <Input
-              type="text"
-              name="years"
-              onChange={handleChange}
-              value={userValues.years}
-              required={true}
-            />
-            <Text>Or</Text>
-            <Label htmlFor="months">Loan term in months</Label>
-            <Input
-              type="text"
-              name="months"
-              onChange={handleChange}
-              value={userValues.years * 12}
-            />
-            <Error>{error.yearsError}</Error>
-            <Label htmlFor="interest">Interest rate per year</Label>
-            <Input
-              type="text"
-              name="interest"
-              onChange={handleChange}
-              value={userValues.interest}
-              required={true}
-            />
-            <Error>{error.interestError}</Error>
-            <Button type="submit">Calculate!</Button>
-          </FormContainer>
-        )}
-        {isResultOpen && (
-          <FormContainer>
-            <ResultField>
-              Loan amount: ${userValues.amount} <br /> Interest:{" "}
-              {userValues.interest}% <br /> Years to repay: {userValues.years}
-            </ResultField>
-            <ResultField>
-              {" "}
-              Monthly Payment: ${results.monthlyPayment}{" "}
-            </ResultField>
+        {/* {!isResultOpen && ( */}
+        <FormContainer>
+          <Label htmlFor="amount">Loan amount</Label>
+          <Input
+            type="text"
+            name="amount"
+            onChange={handleChange}
+            value={userValues.amount}
+            required={true}
+          />
+          <Error>{error.amountError}</Error>
+          <Label htmlFor="months">Loan term in years</Label>
+          <Input
+            type="text"
+            name="years"
+            onChange={handleChange}
+            value={convert()}
+            required={true}
+          />
+          <Text>Or</Text>
+          <Label htmlFor="months">Loan term in months</Label>
+          <Input
+            type="text"
+            name="months"
+            onChange={handleChange}
+            value={userValues.months}
+          />
+          <Error>{error.monthsError}</Error>
+          <Label htmlFor="interest">Interest rate per year</Label>
+          <Input
+            type="text"
+            name="interest"
+            onChange={handleChange}
+            value={userValues.interest}
+            required={true}
+          />
+          <Error>{error.interestError}</Error>
+          <Button type="submit">Calculate!</Button>
+        </FormContainer>
+        {/* )} */}
+        {/* {isResultOpen && ( */}
+        <FormContainer>
+          <ResultField>
+            Loan amount: ${userValues.amount} <br /> Interest:{" "}
+            {userValues.interest}% <br /> months to repay: {userValues.months}
+          </ResultField>
+          <ResultField>
+            {" "}
+            Monthly Payment: ${results.monthlyPayment}{" "}
+          </ResultField>
 
-            <ResultField>Total Payment: ${results.totalPayment}</ResultField>
+          <ResultField>Total Payment: ${results.totalPayment}</ResultField>
 
-            <ResultField>Total Interest: ${results.totalInterest} </ResultField>
-            <Button onClick={toggle}>Calculate again!</Button>
-          </FormContainer>
-        )}
+          <ResultField>Total Interest: ${results.totalInterest} </ResultField>
+          <Button onClick={toggle}>Calculate again!</Button>
+        </FormContainer>
+        {/* )} */}
       </Form>
       <Error>{error.isEmptyError}</Error>
     </ContentBox>
@@ -299,10 +322,11 @@ const FormContainer = styled.div`
   height: 450px;
 
   // border: 2px solid #2c3531;
-  // margin: 20px;
+
   padding: 35px;
+  margin: 30px;
   background-color: ${colorPrimary};
-  // box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   // box-shadow: 5px 10px #888888;
 
   // background-color: #116466;
@@ -331,10 +355,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: row;
   overflow: hidden;
+
   // border: 1px solid red;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 `;
 const Input = styled.input`
   height: 350px;
