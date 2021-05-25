@@ -11,6 +11,7 @@ function App() {
     </div>
   );
 }
+
 function Calculator() {
   console.log("Calculator!!!");
   const [userValues, setUserValues] = useState({
@@ -211,12 +212,12 @@ function Calculator() {
       </TitleBox>
       <Form onSubmit={handleSubmit}>
         {!isResultOpen && (
-          <FormContainer>
+          <FormContent>
             <Label>Loan amount</Label>
             <Input
               type="text"
               name="amount"
-              autocomplete="off"
+              autoComplete="off"
               onChange={handleChange}
               value={userValues.amount}
               required={true}
@@ -229,6 +230,7 @@ function Calculator() {
               onChange={handleChange}
               value={convert()}
               required={true}
+              autoComplete="off"
             />
             <Error>{error.monthsError}</Error>
             <Text>Or</Text>
@@ -238,6 +240,7 @@ function Calculator() {
               name="months"
               onChange={handleChange}
               value={userValues.months}
+              autoComplete="off"
             />
             <Error>{error.monthsError}</Error>
             <Label htmlFor="interest">Interest rate per year</Label>
@@ -247,13 +250,14 @@ function Calculator() {
               onChange={handleChange}
               value={userValues.interest}
               required={true}
+              autoComplete="off"
             />
             <Error>{error.interestError}</Error>
             <Button type="submit">Calculate!</Button>
-          </FormContainer>
+          </FormContent>
         )}
         {isResultOpen && (
-          <FormContainer>
+          <FormContent>
             <ResultField>Loan amount: ${userValues.amount}</ResultField>
             <ResultField>Interest: {userValues.interest}%</ResultField>
             <ResultField>Months to repay: {userValues.months}</ResultField>
@@ -262,15 +266,11 @@ function Calculator() {
               Monthly Payment: ${results.monthlyPayment}{" "}
             </MonthlyPayment>
 
-            <ResultField_2>
-              Total Payment: ${results.totalPayment}
-            </ResultField_2>
+            <Result>Total Payment: ${results.totalPayment}</Result>
 
-            <ResultField_2>
-              Total Interest: ${results.totalInterest}{" "}
-            </ResultField_2>
+            <Result>Total Interest: ${results.totalInterest} </Result>
             <Button onClick={toggle}>Calculate again!</Button>
-          </FormContainer>
+          </FormContent>
         )}
       </Form>
     </ContentBox>
@@ -279,14 +279,12 @@ function Calculator() {
 
 export default App;
 
-// STYLES
-//#007f85
-//#79ad9f
+/////////// STYLES ///////////
+
 const colorPrimary = "#007f85";
 const colorSecondary = "#eadd46";
 const colorWhite = "#fdfffc";
 const colorDark = "#1c2725";
-// const colorDark = "#193439";
 
 const textShadow = "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black";
 const boxShadow =
@@ -294,104 +292,134 @@ const boxShadow =
 
 const ContentBox = styled.div`
   display: flex;
-  // background-color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: Verdana, sans-serif;
   text-transform: uppercase;
-
-  // border-bottom: 2px ridge black;
-  // padding: 50px 0 50px 0;
-
-  //   @media (max-width: 900px) {
-  //     padding: 30px 0 50px 0;
-  //   }
-  //   @media (min-width: 1800px) {
-  //     padding: 80px 0 80px 0;
-  //   }
-  //
 `;
-const FormContainer = styled.div`
+
+const TitleBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px;
+`;
+
+const Logo = styled.img`
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  margin: 10px;
+  padding: 5px;
+  box-shadow: ${boxShadow};
+
+  @media (max-width: 900px) {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (min-width: 1800px) {
+    width: 80px;
+    height: 80px;
+  }
+`;
+
+const Title = styled.h1`
+  color: ${colorDark};
+  text-shadow: ${textShadow};
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 1800px) {
+    font-size: 80px;
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+`;
+
+const FormContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 450px;
   height: 500px;
-
-  // border: 2px solid #2c3531;
-
   padding: 40px;
-  margin: 30px;
   background-color: ${colorPrimary};
   box-shadow: ${boxShadow};
-  // rgba(0, 0, 0, 0.15) 0px 2px 8px;
-  // box-shadow: 5px 10px #888888;
 
-  // background-color: #116466;
-  // border: 2px solid green;
+  @media (max-width: 600px) {
+    width: 300px;
+    height: 400px;
+  }
 
-  // @media (max-width: 600px) {
-  //   width: 450px;
-  // }
-  // @media (max-width: 450px) {
-  //   width: 320px;
-  // }
-  // @media (min-width: 1800px) {
-  //   width: 1200px;
-  // }
+  @media (min-width: 1800px) {
+    width: 900px;
+    height: 1000px;
+    padding: 100px;
+  }
 `;
+
 const Label = styled.label`
-  // border: 1px solid yellow;
-  // margin-bottom: 5px;
   font-size: 17px;
   font-weight: bold;
   color: ${colorWhite};
   text-transform: uppercase;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
 
-  // border: 1px solid red;
+  @media (min-width: 1800px) {
+    font-size: 34px;
+  }
 `;
+
 const Input = styled.input`
   height: 350px;
-  // margin: 8px 8px 0 8px;
   margin-top: 5px;
   padding: 0 0 0 10px;
   background-color: ${colorWhite};
-  // border: 1px solid #2e1114;
-  // border: 2px solid red;
+  color: ${colorDark};
   outline: none;
+  font-size: 16px;
 
-  color: #2c3531;
-  font-size: 1rem;
-
-  &::placeholder {
-    color: black;
-    font-family: "Raleway", sans-serif;
-    letter-spacing: 0.8px;
-  }
   @media (min-width: 1800px) {
-    height: 100px;
-    font-size: 1.4rem;
-    margin: 16px 16px 0 16px;
+    font-size: 30px;
+    margin-top: 15px;
   }
 `;
-const Button = styled.button`
-  // width: 80px;
 
+const Error = styled.h3`
+  color: ${colorDark};
+  font-size: 13px;
+
+  @media (min-width: 1800px) {
+    font-size: 25px;
+  }
+`;
+
+const Text = styled.div`
+  padding: 5px 0 20px 0;
+  color: ${colorWhite};
+  text-transform: uppercase;
+
+  @media (min-width: 1800px) {
+    font-size: 30px;
+    padding: 15px 0 60px 0;
+  }
+`;
+
+const Button = styled.button`
   outline: none;
-  // font-weight: 700;
   background-color: ${colorSecondary};
   color: ${colorDark};
-
-  // letter-spacing: 0.1rem;
-  font-size: 0.9rem;
+  font-size: 16px;
   padding: 10px;
   margin: 15px 0 15px 0;
+
   &:active {
     border: 1px solid black;
   }
@@ -399,74 +427,51 @@ const Button = styled.button`
     cursor: pointer;
   }
 
-  @media (max-width: 900px) {
-    width: 100px;
-    font-weight: 400;
-    letter-spacing: 0;
-    font-size: 0.9rem;
-  }
   @media (max-width: 600px) {
-    width: 70px;
-    margin-right: 5px;
-    font-size: 0.8rem;
-    line-height: 12px;
+    font-size: 12px;
     padding: 7px;
   }
   @media (min-width: 1800px) {
-    width: 200px;
-    height: 60px;
-    letter-spacing: 0.2rem;
-    font-size: 1.5rem;
+    font-weight: 700;
+    font-size: 35px;
+    padding: 20px;
   }
 `;
 
 const ResultField = styled.h4`
   margin: 8px;
   color: ${colorWhite};
+
+  @media (max-width: 600px) {
+    margin: 6px;
+  }
+  @media (min-width: 1800px) {
+    font-size: 40px;
+    margin: 20px;
+  }
 `;
-const ResultField_2 = styled(ResultField)`
-  text-shadow: ${textShadow};
-  margin-bottom: 15px;
-`;
+
 const MonthlyPayment = styled(Label)`
   font-size: 35px;
   margin: 60px;
   text-align: center;
   color: ${colorSecondary};
-`;
 
-const Error = styled.h3`
-  color: ${colorDark};
-  font-size: 0.8rem;
-`;
-const TitleBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-`;
-const Title = styled.h1`
-  color: ${colorDark};
-`;
-const Text = styled.div`
-  padding: 5px 0 20px 0;
-  color: ${colorWhite};
-
-  text-transform: uppercase;
-`;
-const Logo = styled.img`
-  width: 25px;
-  height: 25px;
-  background-color: white;
-  margin: 10px;
-  // border: 1px solid black;
-
-  @media (max-width: 900px) {
-    width: 30px;
-    height: 30px;
+  @media (max-width: 600px) {
+    margin: 35px;
+    font-size: 25px;
   }
+  @media (min-width: 1800px) {
+    margin: 100px;
+    font-size: 70px;
+  }
+`;
+
+const Result = styled(ResultField)`
+  text-shadow: ${textShadow};
+  margin-bottom: 15px;
 
   @media (min-width: 1800px) {
-    width: 200px;
-    height: 200px;
+    margin-bottom: 50px;
   }
 `;
