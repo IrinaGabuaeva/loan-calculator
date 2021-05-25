@@ -16,6 +16,7 @@ function Calculator() {
   const [userValues, setUserValues] = useState({
     amount: "",
     years: "",
+    months: "",
     interest: "",
   });
   console.log("User VALUES", userValues);
@@ -42,6 +43,8 @@ function Calculator() {
       ...userValues,
       [event.target.name]: event.target.value,
     };
+
+    console.log("values in handleChange", values);
     setUserValues(values);
     console.log("userValues", userValues);
     const actualError = returnError(values);
@@ -58,11 +61,7 @@ function Calculator() {
       isEmptyError: "",
     };
     console.log("Actual error", actualError);
-    // Validate if there are values
-    // if (!amount || !interest || !years) {
-    //   actualError.isEmptyError = "All the values are required";
-    // }
-    // if "amount" field is being modified
+
     if (amount) {
       // Validade if the values are numbers
       if (isNaN(amount)) {
@@ -94,7 +93,7 @@ function Calculator() {
       }
       // Validate if the values are in the correct range
       if (Number(years) < 0 || Number(years) > 40) {
-        actualError.yearsError = "The number must be between 1 and 40";
+        actualError.yearsError = "Enter a number between 1 and 40";
       }
     }
 
@@ -217,6 +216,14 @@ function Calculator() {
               value={userValues.years}
               required={true}
             />
+            <Text>Or</Text>
+            <Label htmlFor="months">Loan term in months</Label>
+            <Input
+              type="text"
+              name="months"
+              onChange={handleChange}
+              value={userValues.years * 12}
+            />
             <Error>{error.yearsError}</Error>
             <Label htmlFor="interest">Interest rate per year</Label>
             <Input
@@ -255,14 +262,27 @@ function Calculator() {
 
 export default App;
 
+// STYLES
+//#007f85
+//#79ad9f
+const colorPrimary = "#007f85";
+const colorMaybePrimary = "#6DB471";
+const colorWhite = "#fdfffc";
+const colorError = "e86741";
+const colorTitle = "#193439";
+const colorErrorMaybe = "#740c59";
+
 const ContentBox = styled.div`
   display: flex;
-  background-color: white;
+  // background-color: white;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: Verdana, sans-serif;
+  text-transform: uppercase;
+
   // border-bottom: 2px ridge black;
-  padding: 50px 0 50px 0;
+  // padding: 50px 0 50px 0;
 
   //   @media (max-width: 900px) {
   //     padding: 30px 0 50px 0;
@@ -276,10 +296,17 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  border: 3px solid #2c3531;
-  margin: 20px;
-  padding: 10px;
-  background-color: #116466;
+  height: 450px;
+
+  // border: 2px solid #2c3531;
+  // margin: 20px;
+  padding: 35px;
+  background-color: ${colorPrimary};
+  // box-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  // box-shadow: 5px 10px #888888;
+
+  // background-color: #116466;
+  // border: 2px solid green;
 
   // @media (max-width: 600px) {
   //   width: 450px;
@@ -292,19 +319,31 @@ const FormContainer = styled.div`
   // }
 `;
 const Label = styled.label`
-  padding: 10px;
+  // border: 1px solid yellow;
+  // margin-bottom: 5px;
+  font-size: 17px;
+  font-weight: bold;
+  color: ${colorWhite};
+  text-transform: uppercase;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: row;
   overflow: hidden;
+  // border: 1px solid red;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 `;
 const Input = styled.input`
-  height: 50px;
-  margin: 8px 8px 0 8px;
+  height: 350px;
+  // margin: 8px 8px 0 8px;
+  margin-top: 5px;
   padding: 0 0 0 10px;
-  background-color: #d1e8e2;
-  border: 1px solid #2e1114;
+  background-color: ${colorWhite};
+  // border: 1px solid #2e1114;
+  // border: 2px solid red;
   outline: none;
 
   color: #2c3531;
@@ -365,7 +404,8 @@ const ResultField = styled.h4`
 `;
 
 const Error = styled.h3`
-  color: red;
+  color: ${colorError};
+  font-size: 0.8rem;
 `;
 const TitleBox = styled.div`
   display: flex;
@@ -373,9 +413,15 @@ const TitleBox = styled.div`
   align-items: baseline;
 `;
 const Title = styled.h1`
-  color: black;
+  color: ${colorTitle};
 `;
-export const Logo = styled.img`
+const Text = styled.div`
+  padding: 10px 0 10px 0;
+  color: ${colorWhite};
+
+  text-transform: uppercase;
+`;
+const Logo = styled.img`
   width: 25px;
   height: 25px;
   background-color: white;
