@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+## Mortgage calculator app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App to calculate monthly payments, total interest and total payments on your loan, depending on the information provided in the input fields(loan amount, loan term and interest rate per year)
 
 ## Available Scripts
 
